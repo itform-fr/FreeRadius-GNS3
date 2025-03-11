@@ -1,0 +1,225 @@
+version 15.2
+service timestamps debug datetime msec
+service timestamps log datetime msec
+no service password-encryption
+service compress-config
+!
+hostname SW-L3
+!
+boot-start-marker
+boot-end-marker
+!
+!
+enable password poseidon
+!
+username julien password 0 poseidon
+aaa new-model
+!
+!
+aaa authentication login default local
+aaa authentication dot1x default group radius
+aaa authorization network default group radius
+!
+!
+!
+!
+!
+!
+aaa session-id common
+!
+!
+!
+!
+!
+!
+!
+ip dhcp pool prod
+ network 192.168.0.0 255.255.255.0
+ default-router 192.168.0.254
+ dns-server 192.168.50.250
+!
+ip dhcp pool admin
+!
+ip dhcp pool direction
+ network 192.168.1.0 255.255.255.0
+ default-router 192.168.1.254
+ dns-server 192.168.50.250
+ domain-name ais.labo
+!
+!
+ip domain-name ais.labo
+ip cef
+no ipv6 cef
+!
+!
+dot1x system-auth-control
+!
+spanning-tree mode pvst
+spanning-tree extend system-id
+!
+vlan internal allocation policy ascending
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+!
+interface GigabitEthernet0/0
+ no switchport
+ ip address 10.0.0.0 255.255.255.254
+ negotiation auto
+!
+interface GigabitEthernet0/1
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/2
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet0/3
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet1/0
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+ authentication port-control auto
+ dot1x pae authenticator
+!
+interface GigabitEthernet1/1
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+ authentication port-control auto
+ dot1x pae authenticator
+!
+interface GigabitEthernet1/2
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+ authentication port-control auto
+ dot1x pae authenticator
+!
+interface GigabitEthernet1/3
+ switchport access vlan 10
+ switchport mode access
+ media-type rj45
+ negotiation auto
+ authentication port-control auto
+ dot1x pae authenticator
+!
+interface GigabitEthernet2/0
+ switchport access vlan 11
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/1
+ switchport access vlan 11
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/2
+ switchport access vlan 11
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet2/3
+ switchport access vlan 11
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/0
+ switchport access vlan 100
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/1
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/2
+ switchport access vlan 50
+ switchport mode access
+ media-type rj45
+ negotiation auto
+!
+interface GigabitEthernet3/3
+ media-type rj45
+ negotiation auto
+!
+interface Vlan10
+ ip address 192.168.0.254 255.255.255.0
+!
+interface Vlan11
+ ip address 192.168.1.254 255.255.255.0
+!
+interface Vlan50
+ ip address 192.168.50.254 255.255.255.0
+!
+interface Vlan100
+ ip address 192.168.100.254 255.255.255.0
+!
+ip forward-protocol nd
+!
+no ip http server
+no ip http secure-server
+!
+ip route 0.0.0.0 0.0.0.0 10.0.0.1
+ip ssh version 2
+!
+!
+!
+!
+!
+!
+radius server FreeRadius
+ address ipv4 192.168.100.250 auth-port 1812 acct-port 1813
+ key poseidon
+!
+!
+control-plane
+!
+banner exec ^C^C
+banner incoming ^C
+**************************************************************************
+* IOSv is strictly limited to use for evaluation, demonstration and IOS  *
+* education. IOSv is provided as-is and is not supported by Cisco's      *
+* Technical Advisory Center. Any use or disclosure, in whole or in part, *
+* of the IOSv Software or Documentation to any third party for any       *
+* purposes is expressly prohibited except as otherwise authorized by     *
+* Cisco in writing.                                                      *
+**************************************************************************^C
+banner login ^C^C
+banner motd ^C^C
+!
+line con 0
+line aux 0
+line vty 0 4
+ transport input ssh
+!
+!
+end
