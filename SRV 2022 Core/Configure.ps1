@@ -13,7 +13,7 @@ $ous.GetEnumerator() | Sort-Object {$_.Value} | ForEach-Object {
 }
 $users.GetEnumerator() | ForEach-Object {
         New-ADUser -Name $_.Key -DisplayName $_.Key -GivenName $_.Key -AccountPassword $(ConvertTo-SecureString -AsPlainText -Force "0Poseidon") -Path $("OU=utilisateurs," + $(get-adorganisationalUnit -Filter 'name -like $_.Value').distinguishedname) -Enabled 1 -UserPrincipalName $($_.Key + "@ais.labo") -PasswordNeverExpires 1
-        New-ADOrganisationalUnit -name $_.Key -Path "DC=ais,DC=labo"
+        New-ADGroupMember -Identity $("gg_" + $_.Value) -Members $_.Key
 
 }
 
