@@ -9,5 +9,5 @@ New-NetIPAddress -InterfaceAlias $Carte -IPAddress $Adresse -PrefixLength 24 -De
 #>
 New-ItemProperty -Path "HKLM\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters" -Name "AlwaysExpectDomainController" -Value 1 -PropertyType DWord -Force
 Install-WindowsFeature ad-domain-services
-Install-ADDSForest -DomainName $Domaine -SafeModeAdministratorPassword $(ConvertTo-SecureString -Force -AsPlainText "0Poseidon")  -confirm:$false
+Install-ADDSForest -DomainName ais.labo -SafeModeAdministratorPassword $(ConvertTo-SecureString -Force -AsPlainText "0Poseidon")  -confirm:$false
 
