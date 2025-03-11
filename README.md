@@ -1,7 +1,7 @@
 ### Configuration d'un schéma réseau avec la mise en oeuvre de FreeRadius sur GNS3:
 
 ![images/image1](images/image1.png)
-# 1. Configuration du Switch 🖧
+# I. Configuration du Switch 🖧
 Se connecter à la console du switch puis aller en mode config :  
 **Commandes Cisco :**
 
@@ -10,11 +10,11 @@ enable
 configure terminal
 ```
 
-Puis coller la configuration correspondant au switch de Niv.III.
+Puis coller la running-config correspondant au switch de Niv.III.
 
 ---
 
-# 2. Configuration du Routeur 🌐
+# II. Configuration du Routeur 🌐
 Se connecter à la console du routeur puis aller en mode config :  
 **Commandes Cisco :**
 
@@ -23,11 +23,11 @@ enable
 configure terminal
 ```
 
-Puis coller la configuration correspondant au routeur R-0.
+Puis coller la running-config correspondant au routeur R-0.
 
 ---
 
-# 3. Configuration du Serveur FreeRADIUS 💻
+# III. Configuration du Serveur FreeRADIUS 💻
 1. Connecter une machine Debian sur l'interface `gig 3/0` du switch `SW-L3`.
 2. Attribuer l'adresse IP `192.168.100.250/24` et la passerelle `192.168.100.254` sur la machine Debian.
 3. Télécharger et lancer le script suivant :  
@@ -41,7 +41,7 @@ bash config.sh
 
 ---
 
-# 4. Configuration du Serveur Windows Core 🖥️
+# IV. Configuration du Serveur Windows Core 🖥️
 1. Installer le serveur Windows.
 2. Exécuter les commandes PowerShell suivantes :
 
@@ -69,7 +69,7 @@ c:\configure.ps1
 
 ---
 
-# 5. Activation du Service 802.1X sur un Poste Windows 11 🔒
+# V. Activation du Service 802.1X sur un Poste Windows 11 🔒
 Exécuter les commandes suivantes pour activer le service 802.1X :
 
 ```powershell
