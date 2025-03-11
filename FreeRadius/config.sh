@@ -6,8 +6,7 @@ sed -i '$ a client SW-L3 {\n\tipaddr = 192.168.100.254\n\tsecret = poseidon\n}' 
 
 echo "nameserver 192.168.50.250" > /etc/resolv.conf
 rm /etc/krb5.conf
-echo -e "[libdefaults]\n\tdefault_realm = AIS.LABO\n\tdns_lookup_realm = false\n\tdns_lookup_kdc = tr
-ue\n" > /etc/krb5.conf
+echo -e "[libdefaults]\n\tdefault_realm = AIS.LABO\n\tdns_lookup_realm = false\n\tdns_lookup_kdc = true\n" > /etc/krb5.conf
 cat << EOF > /etc/samba/smb.conf
 [global]
    netbios name = FREERADIUS
