@@ -27,21 +27,7 @@ Puis coller la running-config correspondant au routeur R-0.
 
 ---
 
-# III. Configuration du Serveur FreeRADIUS 💻
-1. Connecter une machine Debian sur l'interface `gig 3/0` du switch `SW-L3`.
-2. Attribuer l'adresse IP `192.168.100.250/24` et la passerelle `192.168.100.254` sur la machine Debian.
-3. Télécharger et lancer le script suivant :  
-
-**Commandes Bash :**
-
-```bash
-wget https://raw.githubusercontent.com/itform-fr/FreeRadius-GNS3/refs/heads/main/FreeRadius/config.sh
-bash config.sh
-```
-
----
-
-# IV. Configuration du Serveur Windows Core 🖥️
+# III. Configuration du Serveur Windows Core 🖥️
 1. Installer le serveur Windows.
 2. Exécuter les commandes PowerShell suivantes :
 
@@ -51,6 +37,7 @@ bash config.sh
 $Carte=$(Get-NetAdapter).name
 Set-NetIPInterface -InterfaceAlias $Carte -Dhcp Disabled
 New-NetIPAddress -InterfaceAlias $Carte -IPAddress 192.168.50.250 -PrefixLength 24 -DefaultGateway 192.168.50.254
+Set-DNSClientServerAddress -InterfaceAlias $Carte -ServerAddresses 1.1.1.1,1.0.0.1
 ```
 
 3. Télécharger et exécuter le script suivant :
@@ -68,6 +55,21 @@ c:\configure.ps1
 ```
 
 ---
+
+# IV. Configuration du Serveur FreeRADIUS 💻
+1. Connecter une machine Debian sur l'interface `gig 3/0` du switch `SW-L3`.
+2. Attribuer l'adresse IP `192.168.100.250/24` et la passerelle `192.168.100.254` sur la machine Debian.
+3. Télécharger et lancer le script suivant :  
+
+**Commandes Bash :**
+
+```bash
+wget https://raw.githubusercontent.com/itform-fr/FreeRadius-GNS3/refs/heads/main/FreeRadius/config.sh
+bash config.sh
+```
+
+---
+
 
 # V. Activation du Service 802.1X sur un Poste Windows 11 🔒
 Exécuter les commandes suivantes pour activer le service 802.1X :
