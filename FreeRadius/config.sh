@@ -1,4 +1,4 @@
-apt update && apt install install freeradius samba winbind krb5-user freeradius-ldap -y
+apt update && apt install freeradius samba winbind krb5-user freeradius-ldap -y
 adduser freerad winbindd_priv
 
 sed -i '/#bob/ s/^#//;s/hello/poseidon/' /etc/freeradius/3.0/users
