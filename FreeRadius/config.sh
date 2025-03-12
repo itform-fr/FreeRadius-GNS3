@@ -25,9 +25,8 @@ cat << EOF > /etc/samba/smb.conf
    realm = AIS.LABO
 EOF
 
-systemctl restart winbind
 sed -e '/^#NTP/ s/^#//;/^NTP/ s/=/=192.168.50.250/;/^#RootD/ s/^#//;/^RootD/ s/5/100/' /etc/systemd/timesyncd.conf
-systemctl enable --now systemd-timesyncd.conf
+systemctl enable --now systemd-timesyncd
 
 net ads join --no-dns-updates -U administrateur%0Poseidon
 systemctl restart winbind
