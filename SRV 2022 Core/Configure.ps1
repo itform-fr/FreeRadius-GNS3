@@ -1,3 +1,4 @@
+New-ItemProperty -Path "HKLM:\SYSTEM\CurrentControlSet\Services\NlaSvc\Parameters" -Name "AlwaysExpectDomainController" -Value 1 -PropertyType DWord -Force
 $ous = @{ enterprise='';prod='enterprise';direction='enterprise' }
 $users = @{ bob='prod';alice='prod';jean='direction';pierre='direction'}
 $ous.GetEnumerator() | Sort-Object {$_.Value} | ForEach-Object {
